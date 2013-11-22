@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Crowdmap API Tester</title>
+<style type="text/css">
+* {
+font-family:sans-serif;
+}
+label, input, select, textarea {
+width:100%;
+}
+.success {
+background-color:green;
+color:white;
+}
+.error {
+background-color:red;
+color:white;
+}
+</style>
+</head>
+<body>
+
+<h1>Crowdmap API Tester</h1>
+
+<form action="." method="POST">
+
+<fieldset>
+
+	<legend>Application</legend>
+
+	<p><label for="application_public_key">Public Key</label><br />
+	<input type="text" name="application[public_key]" id="application_public_key" value="<?php print(htmlentities($applicationPublicKey)); ?>" /></p>
+
+	<p><label for="application_private_key">Private Key</label><br />
+	<input type="text" name="application[private_key]" id="application_private_key" value="<?php print(htmlentities($applicationPrivateKey)); ?>" /></p>
+
+</fieldset>
+
+<fieldset>
+
+	<legend>Request</legend>
+
+	<p><label for="request_method">Method</label><br />
+	<select name="request[method]" id="request_method">
+	<?php foreach ($requestMethodValues as $requestMethodValue): ?>
+		<option value="<?php print(htmlentities($requestMethodValue)); ?>"<?php if ($requestMethodValue === $requestMethod): ?> selected="selected" <?php endif; ?>><?php print(htmlentities($requestMethodValue)); ?></option>
+	<?php endforeach; ?>
+	</select></p>
+
+	<p><label for="request_resource">Resource</label><br />
+	<input type="text" name="request[resource]" id="request_resource" value="<?php print(htmlentities($requestResource)); ?>" /></p>
+
+	<p><label for="request_data_format">Data Format</label><br />
+	<select name="request[data_format]" id="request_data_format">
+	<?php foreach ($requestDataFormatValues as $requestDataFormatValue): ?>
+		<option value="<?php print(htmlentities($requestDataFormatValue)); ?>"<?php if ($requestDataFormatValue === $requestDataFormat): ?> selected="selected" <?php endif; ?>><?php print(htmlentities($requestDataFormatValue)); ?></option>
+	<?php endforeach; ?>
+	</select></p>
+
+	<p><label for="request_data">Data</label><br />
+	<textarea name="request[data]" id="request_data" rows="10"><?php print(htmlentities($requestData)); ?></textarea></p>
+
+	<p><input type="submit" value="Submit" /></p>
+
+</fieldset>
+
+<fieldset>
+
+	<legend>Response</legend>
+
+	<p><label for="response_message">Message</label><br />
+	<input type="text" readonly="readonly" id="response_message" value="<?php print(htmlentities($responseMessage)); ?>" class="<?php print(htmlentities($responseStatus)); ?>" /></p>
+
+	<p><label for="response_data_format">Data Format</label><br />
+	<select name="response[data_format]" id="response_data_format">
+	<?php foreach ($responseDataFormatValues as $responseDataFormatValue): ?>
+		<option value="<?php print(htmlentities($responseDataFormatValue)); ?>"<?php if ($responseDataFormatValue === $responseDataFormat): ?> selected="selected" <?php endif; ?>><?php print(htmlentities($responseDataFormatValue)); ?></option>
+	<?php endforeach; ?>
+	</select></p>
+
+	<p><label for="response_data">Data</label><br />
+	<textarea readonly="readonly" id="response_data" rows="10"><?php print(htmlentities($responseData)); ?></textarea></p>
+
+</fieldset>
+
+</form>
+
+</body>
+</html>
