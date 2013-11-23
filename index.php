@@ -108,4 +108,4 @@ if ($_POST) {
 
 }
 
-include('index.html');
+include('index.phtml');
