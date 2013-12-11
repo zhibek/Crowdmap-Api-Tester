@@ -34,8 +34,9 @@ class Crowdmap
             case 'GET':
             case 'DELETE':
                 $options = array(
-                    'header'  => implode("\r\n", $headers),
                     'method'  => $method,
+                    'header'  => implode("\r\n", $headers),
+                    'ignore_errors' => true,
                 );
                 $url .= '?' . http_build_query($data);
             break;
@@ -46,6 +47,7 @@ class Crowdmap
                 $options = array(
                     'method'  => $method,
                     'header'  => implode("\r\n", $headers),
+                    'ignore_errors' => true,
                     'content' => http_build_query($data),
                 );
             break;
@@ -60,7 +62,7 @@ class Crowdmap
         $result = @file_get_contents($url, false, $context);
 
         if (!$result) {
-            throw new Exception(sprintf('Request Error: Call to "%s" resulted in an error', $url));
+            throw new Exception(sprintf('Request Error: ', $http_response_header[0]));
         }
 
         $data = @json_decode($result);
