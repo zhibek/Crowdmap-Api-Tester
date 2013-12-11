@@ -62,7 +62,7 @@ class Crowdmap
         $result = @file_get_contents($url, false, $context);
 
         if (!$result) {
-            throw new Exception(sprintf('Request Error: ', $http_response_header[0]));
+            throw new Exception(sprintf('Request Error: %s', $http_response_header[0]));
         }
 
         $data = @json_decode($result);
