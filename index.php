@@ -69,8 +69,13 @@ if ($_POST) {
     $response = null;
     try {
         $response = $Crowdmap->call($requestMethod, $requestResource, $requestDataParsed);
-        $responseStatus = 'success';
-        $responseMessage = 'Success';
+        if (isset($response->error) && $response->error) {
+            $responseStatus = 'error';
+            $responseMessage = $response->error;
+        } else {
+            $responseStatus = 'success';
+            $responseMessage = 'Success';
+        }
     } catch (Exception $exception) {
         $responseStatus = 'error';
         $responseMessage = $exception->getMessage();
